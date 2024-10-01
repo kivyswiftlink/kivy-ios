@@ -13,7 +13,6 @@ class PillowRecipe(CythonRecipe):
         "freetype",
         "libjpeg",
         "python3",
-        "ios",
     ]
     python_depends = ["setuptools"]
     pbx_libraries = ["libz", "libbz2"]
