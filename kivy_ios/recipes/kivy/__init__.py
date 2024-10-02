@@ -10,9 +10,11 @@ class KivyRecipe(CythonRecipe):
     version = "2.3.0"
     url = "https://github.com/kivy/kivy/archive/{version}.zip"
     library = "libkivy.a"
-    depends = ["sdl2", "sdl2_image", "sdl2_mixer", "sdl2_ttf",
-               "python"]
-    python_depends = ["certifi", "charset-normalizer", "idna", "requests", "urllib3"]
+    depends = [
+                #"sdl2", "sdl2_image", "sdl2_mixer", "sdl2_ttf",
+                #"python"
+            ]
+    #python_depends = ["certifi", "charset-normalizer", "idna", "requests", "urllib3"]
     pbx_frameworks = ["OpenGLES", "Accelerate", "CoreMedia", "CoreVideo"]
     pre_build_ext = True
 

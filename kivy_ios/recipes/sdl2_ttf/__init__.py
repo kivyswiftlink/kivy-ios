@@ -8,7 +8,10 @@ class LibSDL2TTFRecipe(Recipe):
     url = "https://github.com/libsdl-org/SDL_ttf/releases/download/release-{version}/SDL2_ttf-{version}.tar.gz"
     library = "Xcode/build/Release-{plat.sdk}/libSDL2_ttf.a"
     include_dir = "SDL_ttf.h"
-    depends = ["libpng", "sdl2"]
+    depends = [
+        #"libpng",
+        "sdl2"
+        ]
 
     def prebuild_platform(self, plat):
         if self.has_marker("patched"):
