@@ -12,8 +12,8 @@ class KivyRecipe(CythonRecipe):
     url = "https://github.com/kivyswiftlink/kivy-psl/archive/{version}.zip"
     library = "libkivy.a"
     depends = [
-                #"sdl2", "sdl2_image", "sdl2_mixer", "sdl2_ttf",
-                #"python"
+                "sdl2", "sdl2_image", "sdl2_mixer", "sdl2_ttf",
+                "python"
             ]
     #python_depends = ["certifi", "charset-normalizer", "idna", "requests", "urllib3"]
     pbx_frameworks = ["OpenGLES", "Accelerate", "CoreMedia", "CoreVideo"]
