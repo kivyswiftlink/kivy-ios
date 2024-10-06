@@ -426,10 +426,10 @@ class Context:
             ]
         #if platform.machine() == "x86_64":
             # Intel Mac, build for iPhoneOSSimulatorx86_64Platform
-        #self.default_platforms.append(iPhoneSimulatorx86_64Platform(self))
+        self.default_platforms.append(iPhoneSimulatorx86_64Platform(self))
         #elif platform.machine() == "arm64":
             # Apple Silicon Mac, build for iPhoneOSSimulatorARM64Platform
-        #self.default_platforms.append(iPhoneSimulatorARM64Platform(self))
+        self.default_platforms.append(iPhoneSimulatorARM64Platform(self))
 
         # If the user didn't specify a platform, use the default ones.
         self.selected_platforms = self.default_platforms
