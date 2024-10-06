@@ -39,9 +39,13 @@ initial_working_directory = getcwd()
 
 # For more detailed logging, use something like
 # format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(funcName)s():%(lineno)d] %(message)s'
-logging.basicConfig(format='[%(levelname)-8s] %(message)s',
-                    datefmt='%Y-%m-%d:%H:%M:%S',
-                    level=logging.DEBUG)
+logging.basicConfig(
+    filename="log_output.log",
+    format='[%(levelname)-8s] %(message)s',
+    datefmt='%Y-%m-%d:%H:%M:%S',
+    level=logging.INFO
+)
+
 
 # Quiet the loggers we don't care about
 sh_logging = logging.getLogger('sh')
@@ -49,12 +53,16 @@ sh_logging.setLevel(logging.WARNING)
 
 logger = logging.getLogger(__name__)
 
+logger.info("new run:\n")
 
 def shprint(command, *args, **kwargs):
     kwargs["_iter"] = True
     kwargs["_out_bufsize"] = 1
     kwargs["_err_to_out"] = True
-    logger.info("Running Shell: {} {} {}".format(str(command), args, kwargs))
+    indent = 8
+    pp_args = pformat(args, indent)
+    pp_kwargs = pformat(kwargs, indent)
+    logger.info("Running Shell: {} \n\targs:\n\t\t{} \n\tkwargs:\n\t\t{}".format(str(command), pp_args, pp_kwargs))
     cmd = command(*args, **kwargs)
     for line in cmd:
         # strip only last CR:
@@ -404,18 +412,24 @@ class Context:
             iPhoneOSARM64Platform(self),
             iPhoneSimulatorARM64Platform(self),
             iPhoneSimulatorx86_64Platform(self),
+            #macOSx86_64Platform(self),
+            #macOSARM64Platform(self),
         ]
 
         # By default build the following platforms:
         # - iPhoneOSARM64Platform* (arm64)
         # - iPhoneOSSimulator*Platform (arm64 or x86_64), depending on the host
-        self.default_platforms = [iPhoneOSARM64Platform(self)]
-        if platform.machine() == "x86_64":
+        self.default_platforms = [
+            iPhoneOSARM64Platform(self),
+            #macOSx86_64Platform(self),
+            #macOSARM64Platform(self),
+            ]
+        #if platform.machine() == "x86_64":
             # Intel Mac, build for iPhoneOSSimulatorx86_64Platform
-            self.default_platforms.append(iPhoneSimulatorx86_64Platform(self))
-        elif platform.machine() == "arm64":
+        #self.default_platforms.append(iPhoneSimulatorx86_64Platform(self))
+        #elif platform.machine() == "arm64":
             # Apple Silicon Mac, build for iPhoneOSSimulatorARM64Platform
-            self.default_platforms.append(iPhoneSimulatorARM64Platform(self))
+        #self.default_platforms.append(iPhoneSimulatorARM64Platform(self))
 
         # If the user didn't specify a platform, use the default ones.
         self.selected_platforms = self.default_platforms
@@ -1380,7 +1394,7 @@ class ToolchainCL:
         parser = argparse.ArgumentParser(
                 description="Tool for managing the iOS / Python toolchain",
                 usage="""toolchain <command> [<args>]
-
+### modded ###
 Available commands:
 build         Build a recipe (compile a library for the required target
               architecture)
