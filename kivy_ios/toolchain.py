@@ -688,8 +688,8 @@ class Recipe:
     @property
     def platforms_to_build(self):
         for selected_platform in self.ctx.selected_platforms:
-            if selected_platform.name in self.supported_platforms:
-                yield selected_platform
+            #if selected_platform.name in self.supported_platforms:
+            yield selected_platform
 
     @property
     def dist_xcframeworks(self):
