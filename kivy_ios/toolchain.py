@@ -37,7 +37,6 @@ curdir = dirname(__file__)
 
 initial_working_directory = getcwd()
 
-from sh import compile_args
 # For more detailed logging, use something like
 # format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(funcName)s():%(lineno)d] %(message)s'
 logging.basicConfig(
