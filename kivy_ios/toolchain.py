@@ -62,6 +62,7 @@ def shprint(command, *args, **kwargs):
     indent = 8
     pp_args = pformat(args, indent)
     pp_kwargs = pformat(kwargs, indent)
+    logger.info(f"Running Shell(formatted): {sh.compile_args(pp_args, pp_kwargs, " ", "--")}")
     logger.info("Running Shell: {} \n\targs:\n\t\t{} \n\tkwargs:\n\t\t{}".format(str(command), pp_args, pp_kwargs))
     cmd = command(*args, **kwargs)
     for line in cmd:
@@ -887,18 +888,21 @@ class Recipe:
 
     def prebuild_platform(self, plat):
         prebuild = "prebuild_{}".format(plat.arch)
+        logger.info("prebuild_platform Invoking {}".format(prebuild))
         logger.debug("Invoking {}".format(prebuild))
         if hasattr(self, prebuild):
             getattr(self, prebuild)()
 
     def build_platform(self, plat):
         build = "build_{}".format(plat.arch)
+        logger.info("build_platform Invoking {}".format(build))
         logger.debug("Invoking {}".format(build))
         if hasattr(self, build):
             getattr(self, build)()
 
     def postbuild_platform(self, plat):
         postbuild = "postbuild_{}".format(plat.arch)
+        logger.info("postbuild_platform Invoking {}".format(postbuild))
         logger.debug("Invoking {}".format(postbuild))
         if hasattr(self, postbuild):
             getattr(self, postbuild)()
