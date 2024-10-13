@@ -37,6 +37,7 @@ curdir = dirname(__file__)
 
 initial_working_directory = getcwd()
 
+from sh import compile_args
 # For more detailed logging, use something like
 # format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(funcName)s():%(lineno)d] %(message)s'
 logging.basicConfig(
@@ -62,7 +63,7 @@ def shprint(command, *args, **kwargs):
     indent = 8
     pp_args = pformat(args, indent)
     pp_kwargs = pformat(kwargs, indent)
-    sh_cmd = sh.compile_args(pp_args, pp_kwargs, " ", "--")
+    sh_cmd = compile_args(pp_args, pp_kwargs, " ", "--")
     logger.info(f"Running Shell(formatted): {sh_cmd}")
     logger.info("Running Shell: {} \n\targs:\n\t\t{} \n\tkwargs:\n\t\t{}".format(str(command), pp_args, pp_kwargs))
     cmd = command(*args, **kwargs)
