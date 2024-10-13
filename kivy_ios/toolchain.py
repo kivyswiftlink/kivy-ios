@@ -63,7 +63,7 @@ def shprint(command, *args, **kwargs):
     indent = 8
     pp_args = pformat(args, indent)
     pp_kwargs = pformat(kwargs, indent)
-    sh_cmd = compile_args(pp_args, pp_kwargs, " ", "--")
+    sh_cmd = " ".join(args) + " ".join([f"--{k}{v}" for k,v in kwargs])
     logger.info(f"Running Shell(formatted): {sh_cmd}")
     logger.info("Running Shell: {} \n\targs:\n\t\t{} \n\tkwargs:\n\t\t{}".format(str(command), pp_args, pp_kwargs))
     cmd = command(*args, **kwargs)
