@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 
 class KivyRecipe(CythonRecipe):
-    version = "master"
+    version = "2.3.1"
     url = "https://github.com/kivy/kivy/archive/{version}.zip"
     #url = "https://github.com/kivyswiftlink/swifty-kivy/archive/refs/heads/master.zip"
     library = "libkivy.a"
